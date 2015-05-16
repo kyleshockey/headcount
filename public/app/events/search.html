@@ -1,11 +1,9 @@
 
 <div layout="row">
-  <div ng-controller="SearchController" class="center-form">
-    <h1 class="auth_title">SEARCH</h1>
+  <div ng-controller="SearchController" class="ui form">
     <form ng-submit="searchAmazon()">
-    <div class="form-group">
-      <span><label for="username">Search Keyword</label>
-      <input type="text" class="form-control" placeholder="Keyword" ng-model="search.search" required>
+      <div class="two fields">
+      <input type="text" class="ui input fluid" placeholder="Search for an item.." ng-model="search.search" required>
       <select id="products">
         <option value="Books">Books</option>
         <option value="HomeGarden">Home And Garden</option>
@@ -15,10 +13,50 @@
     <button type="submit" class="btn btn-default">Search</button>
     </form>
 
-  <table class="table table-bordered">
+
+    <div class="ui five cards">
+      <div class="card" ng-repeat="product in searchResults" ng-show="showSearch">
+        <a class="image">
+          <img src="{{product.img}}">
+        </a>
+        <div class="content">
+          <a class="header">{{product.title}}</a>
+          <div class="meta">
+            <a>{{product.price}}</a>
+          </div>
+        </div>
+        <div class="extra">
+          <div class="ui labeled icon button" ng-click="addToCart(product.asin, product.img, product.description)">
+            <i class="add to cart icon"></i>
+            Add to Cart
+          </div>
+          </div>
+      </div>
+    </div>
 
 
+    <!-- cart -->
+    <div class="ui items" ng-show="showCart">
+      <div class="item">
+        <div class="image">
+          <img src="{{cartItem.imageURL}}">
+        </div>
+        <div class="content">
+          <a class="header">{{cartItem.Title}}</a>
+          <div class="meta">
+            <span>{{cartItem.price}}</span>
+          </div>
+          <div class="description">
+            <p></p>
+          </div>
+          <div class="extra">
+            Additional Details
+          </div>
+        </div>
+      </div>
+    </div>
 
+<!-- 
   <tr ng-repeat="product in searchResults" ng-show="showSearch">
     <td class="tdCenter">
       <img ng-src="{{product.img}}.jpg" alt="{{product.title}}" />
@@ -59,101 +97,4 @@
     </td>
   </tr>
   </table>
-</div>
-
-<!--
-
-<div class="newUserEvent" >
-<h1 class="ui header">Create New Event</h1>
-  <div class="ui form">
-    <form name="userForm" ng-model="newEvent" ng-submit="createEvent()">
-    <h4 class="ui dividing header">Event Information</h4>
-      <div class="two fields">
-        <div class="field">
-          <label>Event Title</label>
-          <input type="text" placeholder="My Awesome Event" ng-model="newEvent.title">
-        </div>
-        <div class="field">
-          <label>Expiration Date</label>
-          <input type="date" ng-model="newEvent.expiration">
-        </div>
-      </div>
-      <div class="three fields">
-        <div class="field">
-          <label>Amount</label>
-          <div class="ui icon input">
-            <input type="text" ng-model="newEvent.thresholdMoney">
-            <i class="dollar icon"></i>
-          </div>
-        </div>
-        <div class="field">
-          <label>Number of People</label>
-          <div class="ui icon input">
-            <input type="text" ng-model="newEvent.thresholdPeople">
-            <i class="users icon"></i>
-          </div>
-        </div>
-        <div class="field">
-          <label>Image URL</label>
-          <input type="url" ng-model="newEvent.image">
-        </div>
-      </div>
-      <div class="field">
-        <label>Description</label>
-        <textarea ng-model="newEvent.description" columns="2"></textarea>
-      </div>
-      <h4 class="ui dividing header">Personal Information</h4>
-      <div class="field">
-        <input type="text" ng-model="user.address" placeholder="Address line 1">
-      </div>
-      <div class="field">
-        <input type="text" ng-model="user.address2" placeholder="Address line 2">
-      </div>
-      <div class="three fields">
-        <div class="field">
-          <input type="text" ng-model="user.city" placeholder="City">
-        </div>
-        <div class="field">
-          <input type="text" ng-model="user.state" placeholder="State">
-        </div>
-        <div class="field">
-          <input type="text" ng-model="user.postalCode" placeholder="Postal Code">
-        </div>
-      </div>
-    </form>
-  </div>
-  <div ng-controller="SearchController" layout="column">
-    <md-content class="md-padding autocomplete" layout="column">
-    <md-contact-chips
-      ng-model="ctrl.contacts"
-      md-contacts="ctrl.querySearch($query)"
-      md-contact-name="name"
-      md-contact-image="image"
-      md-require-match
-      filter-selected="ctrl.filterSelected"
-      placeholder="To">
-    </md-contact-chips>
-    <md-list class="fixedRows">
-    <md-subheader class="md-no-sticky">Contacts</md-subheader>
-    <md-list-item ng-hide="true" class="md-2-line contact-item invitees" data-id="{{contact.id}}" ng-repeat="(index, contact) in ctrl.allContacts" ng-if="ctrl.contacts.indexOf(contact) < 0" layout="column">
-    <img ng-src="{{contact.image}}" class="md-avatar" alt="{{contact.name}}" />
-    <div class="md-list-item-text compact">
-      <h3>{{contact.name}}</h3>
-    </div>
-    </md-list-item>
-    <md-list-item ng-hide="true" class="md-2-line contact-item selected" ng-repeat="(index, contact) in ctrl.contacts">
-    <img ng-hide="true" ng-src="{{contact.image}}" class="md-avatar" alt="{{contact.name}}" />
-    <div ng-hide="true" class="md-list-item-text compact">
-      <h3 ng-hide="true">{{ contact.id }}</h3>
-    </div>
-    </md-list-item>
-    </md-list>
-    </md-content>
-
-     <section layout="row" layout-sm="column" layout align="center center">
-     <button type="submit" class="ui button green" ng-disabled="shouldNotBeCreatable" ng-click="createEvent()">Create</button>
-     </section>
-  </form>
-</div>
-
--->
+</div> -->
